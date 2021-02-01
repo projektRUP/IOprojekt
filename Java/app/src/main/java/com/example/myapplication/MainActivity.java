@@ -8,12 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 import exceptions.AppDoesntHaveNecessaryPermissionsException;
 import exceptions.NoWhatsappInstalledException;
@@ -121,8 +120,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(contactList != null) {
+            // TODO after showing app change this
+            Random randomNumberGenerator = new Random();
+
             for(WhatsappContact contact : contactList) {
-                recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName()));
+                contact.addANewRating(randomNumberGenerator.nextFloat() * 1.2f - 0.25f);
+                switch(contact.getStars()) {
+                    case 1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_1, contact.getDisplayName()));
+                        break;
+                    case 2: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_2, contact.getDisplayName()));
+                        break;
+                    case 3: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_3, contact.getDisplayName()));
+                        break;
+                    case 4: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_4, contact.getDisplayName()));
+                        break;
+                    case 5: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName()));
+                        break;
+                    case -1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_none, contact.getDisplayName()));
+                        break;
+                }
 
                 try {
                     contact.setContactPhoto(ImageRetriever.getContactPhoto(this, contact.getPhoneNumber()));
