@@ -20,6 +20,9 @@ public class Permissions {
     public static void askForPermissions(AppCompatActivity context) {
         ArrayList<String> permissionsRequired = new ArrayList<>();
 
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+            permissionsRequired.add(Manifest.permission.CALL_PHONE);
+
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
             permissionsRequired.add(Manifest.permission.READ_CONTACTS);
 
@@ -28,6 +31,15 @@ public class Permissions {
 
         if(permissionsRequiredArray.length != 0)
             context.requestPermissions(permissionsRequiredArray, 1);
+    }
+
+    /**
+     * Returns true/false depending on if the app has the "MAKE_CALL" permission.
+     * @param context context of the application
+     * @return true if application has the "MAKE_CALL" permission, or false otherwise
+     */
+    public static boolean doesApplicationHaveMakeCallPermission(AppCompatActivity context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**

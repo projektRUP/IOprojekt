@@ -26,9 +26,12 @@ public class WhatsappAccesser {
      * @param actionId the id for performing an action - either videoCallId, or voipCallId from WhatsappContact class
      * @throws NoWhatsappInstalledException If whatsapp isn't installed an exception will be thrown.
      */
-    public static void makeACall(AppCompatActivity context, String actionId) throws NoWhatsappInstalledException {
+    public static void makeACall(AppCompatActivity context, String actionId) throws NoWhatsappInstalledException, AppDoesntHaveNecessaryPermissionsException {
         if (!isWhatsappInstalled(context))
             throw new NoWhatsappInstalledException("Whatsapp seems not to be istalled");
+
+        if(!Permissions.doesApplicationHaveMakeCallPermission(context))
+            throw new AppDoesntHaveNecessaryPermissionsException();
 
         Intent intent = new Intent();
 

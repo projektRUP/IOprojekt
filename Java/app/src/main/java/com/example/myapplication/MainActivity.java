@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,9 +15,17 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import exceptions.AppDoesntHaveNecessaryPermissionsException;
+import exceptions.NoWhatsappInstalledException;
+import phone.ImageRetriever;
+import phone.Permissions;
+import whatsapp.WhatsappAccesser;
+import whatsapp.WhatsappContact;
+
 public class MainActivity extends AppCompatActivity {
     private ArrayList<SpinnerItem> spinnerList;
     private ArrayList<RecyclerItem> recyclerList;
+    private ArrayList<WhatsappContact> contactList;
 
     private SpinnerAdapter sAdapter;
     private RecyclerView mRecyclerView;
@@ -27,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Permissions.askForPermissions(this);
+        }
 
         initList();
         initList2();
@@ -68,12 +81,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCallClick(int posititon) {
-                Toast.makeText(MainActivity.this, posititon + ": selected call", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, posititon + ": selected call", Toast.LENGTH_SHORT).show();
+                try {
+                    WhatsappAccesser.makeACall(MainActivity.this, contactList.get(posititon).getVoipCallId());
+                } catch (NoWhatsappInstalledException | AppDoesntHaveNecessaryPermissionsException e) {
+                    e.printStackTrace();
+                    // TODO notify user about why the function might not work
+                }
             }
 
             @Override
             public void onVideoCallClick(int position) {
-                Toast.makeText(MainActivity.this, position + ": selected videocall", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, position + ": selected videocall", Toast.LENGTH_SHORT).show();
+                try {
+                    WhatsappAccesser.makeACall(MainActivity.this, contactList.get(position).getVideoCallId());
+                } catch (NoWhatsappInstalledException | AppDoesntHaveNecessaryPermissionsException e) {
+                    e.printStackTrace();
+                    // TODO notify user about why the function might not work
+                }
             }
         });
     }
@@ -84,14 +109,27 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initList2(){
         recyclerList = new ArrayList<>();
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
 
+        try {
+            contactList = WhatsappAccesser.getWhatsappContacts(this);
+        } catch (NoWhatsappInstalledException e) {
+            e.printStackTrace();
+            // TODO notify user that whatsapp might not be installed
+        } catch (AppDoesntHaveNecessaryPermissionsException e) {
+            e.printStackTrace();
+            // TODO notify user that the app might not have all necessary permissions
+        }
 
+        if(contactList != null) {
+            for(WhatsappContact contact : contactList) {
+                recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, contact.getDisplayName()));
 
+                try {
+                    contact.setContactPhoto(ImageRetriever.getContactPhoto(this, contact.getPhoneNumber()));
+                } catch (AppDoesntHaveNecessaryPermissionsException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
