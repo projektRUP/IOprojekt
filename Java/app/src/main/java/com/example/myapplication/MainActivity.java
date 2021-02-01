@@ -90,7 +90,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
         recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
         recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
-
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
+        recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, "Angry Mike"));
 
 
     }
