@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(contactList != null) {
             for(WhatsappContact contact : contactList) {
-                recyclerList.add(new RecyclerItem(R.drawable.profile, R.drawable.rating_5, contact.getDisplayName()));
+                recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName()));
 
                 try {
                     contact.setContactPhoto(ImageRetriever.getContactPhoto(this, contact.getPhoneNumber()));
