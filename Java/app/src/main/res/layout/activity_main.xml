@@ -45,6 +45,9 @@
                 android:id="@+id/spinnerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -54,13 +57,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                app:civ_border_color="#FFFFFF"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profileImg"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/profile"
                 app:civ_border_width="2dp"
-                android:src="@drawable/profile"/>
+                app:civ_border_color="#FFFFFF"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

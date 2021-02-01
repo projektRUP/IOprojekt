@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,32 +11,40 @@
         android:layout_margin="4dp"
         android:background="@drawable/recycler_item_bg">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImg"
             android:layout_width="45dp"
-            android:layout_height="45dp" />
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp" />
 
         <TextView
             android:id="@+id/nameText"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="false"
-            android:layout_marginStart="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="-1dp"
             android:layout_toEndOf="@+id/profileImg"
             android:layout_toRightOf="@+id/profileImg"
             android:text="TextView"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <ImageView
             android:id="@+id/ratingImg"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="31dp"
-            android:layout_marginLeft="31dp"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_toEndOf="@+id/nameText"
             android:layout_toRightOf="@+id/nameText" />
 
@@ -43,6 +52,12 @@
             android:id="@+id/callImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
             android:layout_toEndOf="@+id/ratingImg"
             android:layout_toRightOf="@+id/ratingImg"
             android:src="@drawable/ic_baseline_call_24" />
@@ -51,9 +66,16 @@
             android:id="@+id/VideoCallImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
             android:layout_toEndOf="@+id/callImg"
             android:layout_toRightOf="@+id/callImg"
             android:src="@drawable/ic_baseline_videocam_24" />
+
 
     </RelativeLayout>
 
