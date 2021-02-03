@@ -120,11 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(contactList != null) {
-            // TODO after showing app change this
-            Random randomNumberGenerator = new Random();
-
             for(WhatsappContact contact : contactList) {
-                contact.addANewRating(randomNumberGenerator.nextFloat() * 1.2f - 0.25f);
                 switch(contact.getStars()) {
                     case 1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_1, contact.getDisplayName()));
                         break;
@@ -138,12 +134,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case -1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_none, contact.getDisplayName()));
                         break;
-                }
-
-                try {
-                    contact.setContactPhoto(ImageRetriever.getContactPhoto(this, contact.getPhoneNumber()));
-                } catch (AppDoesntHaveNecessaryPermissionsException e) {
-                    e.printStackTrace();
                 }
             }
         }

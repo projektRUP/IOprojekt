@@ -28,7 +28,7 @@ public class WhatsappAccesser {
      */
     public static void makeACall(AppCompatActivity context, String actionId) throws NoWhatsappInstalledException, AppDoesntHaveNecessaryPermissionsException {
         if (!isWhatsappInstalled(context))
-            throw new NoWhatsappInstalledException("Whatsapp seems not to be istalled");
+            throw new NoWhatsappInstalledException("Whatsapp seems not to be installed");
 
         if(!Permissions.doesApplicationHaveMakeCallPermission(context))
             throw new AppDoesntHaveNecessaryPermissionsException();
@@ -52,7 +52,7 @@ public class WhatsappAccesser {
      */
     public static ArrayList<WhatsappContact> getWhatsappContacts(AppCompatActivity context) throws NoWhatsappInstalledException, AppDoesntHaveNecessaryPermissionsException {
         if (!isWhatsappInstalled(context))
-            throw new NoWhatsappInstalledException("Whatsapp seems not to be istalled");
+            throw new NoWhatsappInstalledException("Whatsapp seems not to be installed");
 
         if (!Permissions.doesApplicationHaveReadContactsPermission(context))
             throw new AppDoesntHaveNecessaryPermissionsException("the app needs 'READ_CONTACTS' permission to perform the action");
@@ -88,7 +88,7 @@ public class WhatsappAccesser {
             boolean isOfRightMimetype = (mimeType.equals(videoCall) || mimeType.equals(voipCall));
 
             if (isOfRightMimetype && !primaryKeySet.contains(primaryKey)) {
-                myWhatsappContacts.add(new WhatsappContact(primaryKey, displayName, phoneNumber));
+                myWhatsappContacts.add(new WhatsappContact(context, primaryKey, displayName, phoneNumber));
                 primaryKeySet.add(primaryKey);
 
                 if (mimeType.equals("vnd.android.cursor.item/vnd.com.whatsapp.video.call"))

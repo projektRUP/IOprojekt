@@ -23,40 +23,40 @@ import static predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS;
 import static predefined.Values.NUMBER_OF_CALLS_TO_REMEMBER;
 import static predefined.Values.VALUE_FOR_EMPTY_RATING;
 
-public class CallRating implements java.io.Serializable {
+public class RatingContainer implements java.io.Serializable {
     private String primaryKey;
-    private float[] callRatings = new float[NUMBER_OF_CALLS_TO_REMEMBER];
+    private float[] ratings = new float[NUMBER_OF_CALLS_TO_REMEMBER];
 
-    public CallRating() {
-        Arrays.fill(callRatings, VALUE_FOR_EMPTY_RATING);
+    public RatingContainer() {
+        Arrays.fill(ratings, VALUE_FOR_EMPTY_RATING);
     }
 
-    public CallRating(String primaryKey) {
-        Arrays.fill(callRatings, VALUE_FOR_EMPTY_RATING);
+    public RatingContainer(String primaryKey) {
+        Arrays.fill(ratings, VALUE_FOR_EMPTY_RATING);
         this.primaryKey = primaryKey;
     }
 
-    public CallRating(String primaryKey, float initialValue) {
-        Arrays.fill(callRatings, initialValue);
+    public RatingContainer(String primaryKey, float initialValue) {
+        Arrays.fill(ratings, initialValue);
         this.primaryKey = primaryKey;
     }
 
-    public CallRating(float initialValue) {
-        Arrays.fill(callRatings, initialValue);
+    public RatingContainer(float initialValue) {
+        Arrays.fill(ratings, initialValue);
     }
 
     // methods
 
     /**
      * Returns the average of the ratings stored in this classes' instance.
-     * @return average of all elements which value doesn't equal "predefined.Values.VALUE_FOR_EMPTY_RATING"
+     * @return average of all elements which value doesn't equal predefined.Values.VALUE_FOR_EMPTY_RATING
      */
     public float getAvarage() {
         int l = 0;
         float result = 0;
 
-        while(l < callRatings.length && callRatings[l] != VALUE_FOR_EMPTY_RATING) {
-            result += callRatings[l];
+        while(l < ratings.length && ratings[l] != VALUE_FOR_EMPTY_RATING) {
+            result += ratings[l];
             l ++;
         }
 
@@ -69,14 +69,14 @@ public class CallRating implements java.io.Serializable {
     }
 
     /**
-     * Saves given ClassRating instances to a file specified in "predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS".
-     * Overwrites ClassRating instances based on "primaryKey".
-     * Doesn't delete previously created ClassRating instances, that do not have primaryKey's identical to the ones of "saved".
+     * Saves given RatingContainer instances to a file specified in predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS.
+     * Overwrites RatingContainer instances based on primaryKey.
+     * Doesn't delete previously created RatingContainer instances, that do not have primaryKey's identical to the ones of saved.
      * @param context context of the application
-     * @param ratingsToSave CallRating calss instances' which you want to save
-     * @throws PassedArgumentIsNullException if passed argument "ratingsToSave" is null an exception will be thrown.
+     * @param ratingsToSave RatingContainer calss instances' which you want to save
+     * @throws PassedArgumentIsNullException if passed argument ratingsToSave is null an exception will be thrown.
      */
-    public static void saveRatingsToAFile(AppCompatActivity context, ArrayList<CallRating> ratingsToSave) throws PassedArgumentIsNullException {
+    public static void saveRatingsToAFile(AppCompatActivity context, ArrayList<RatingContainer> ratingsToSave) throws PassedArgumentIsNullException {
         if(ratingsToSave == null)
             throw new PassedArgumentIsNullException();
 
@@ -96,13 +96,13 @@ public class CallRating implements java.io.Serializable {
             }
         }
 
-        ArrayList<CallRating> ratingsAlreadyExisting = getRatingsFromAFile(context);
+        ArrayList<RatingContainer> ratingsAlreadyExisting = getRatingsFromAFile(context);
 
-        for(CallRating rating : ratingsToSave)
+        for(RatingContainer rating : ratingsToSave)
             primaryKeysOfRatingsToSave.add(rating.primaryKey);
 
         if(ratingsAlreadyExisting != null)
-            for(CallRating rating : ratingsAlreadyExisting)
+            for(RatingContainer rating : ratingsAlreadyExisting)
                 if(!primaryKeysOfRatingsToSave.contains(rating.primaryKey))
                     ratingsToSave.add(rating);
 
@@ -128,19 +128,19 @@ public class CallRating implements java.io.Serializable {
     }
 
     /**
-     * Saves a single instance of ClassRating to a file specified in "predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS".
-     * Overwrites ClassRating instance based on primaryKey.
-     * Doesn't delete previously created ClassRating instances that do not have the same primaryKey as the "ratingToSave".
+     * Saves a single instance of RatingContainer to a file specified in predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS.
+     * Overwrites RatingContainer instance based on primaryKey.
+     * Doesn't delete previously created RatingContainer instances that do not have the same primaryKey as the ratingToSave argument.
      * @param context context of the application
-     * @param ratingToSave CallRating instance to save
-     * @throws PassedArgumentIsNullException if passed argument "ratingsToSave" is null an exception will be thrown.
+     * @param ratingToSave RatingContainer instance to save
+     * @throws PassedArgumentIsNullException if passed argument ratingsToSave is null an exception will be thrown.
      */
-    public static void saveASingleRatingToAFile(AppCompatActivity context, CallRating ratingToSave) throws PassedArgumentIsNullException {
+    public static void saveASingleRatingToAFile(AppCompatActivity context, RatingContainer ratingToSave) throws PassedArgumentIsNullException {
         if(ratingToSave == null)
             throw new PassedArgumentIsNullException();
 
         String storageFilePath = context.getFilesDir() + "/" + NAME_OF_A_FILE_WITH_CALL_RATINGS;
-        ArrayList<CallRating> ratingsToSave = new ArrayList<>();
+        ArrayList<RatingContainer> ratingsToSave = new ArrayList<>();
 
         File storageFile = new File(storageFilePath);
         FileOutputStream fileOutputStream = null;
@@ -154,10 +154,10 @@ public class CallRating implements java.io.Serializable {
             }
         }
 
-        ArrayList<CallRating> ratingsAlreadyExisting = getRatingsFromAFile(context);;
+        ArrayList<RatingContainer> ratingsAlreadyExisting = getRatingsFromAFile(context);;
 
         if(ratingsAlreadyExisting != null)
-            for(CallRating rating : ratingsAlreadyExisting)
+            for(RatingContainer rating : ratingsAlreadyExisting)
                 if(!rating.primaryKey.equals(ratingToSave.primaryKey))
                     ratingsToSave.add(rating);
 
@@ -185,19 +185,19 @@ public class CallRating implements java.io.Serializable {
     }
 
     /**
-     * Returns an ArrayList of CallRating instances from a file.
-     * The file is specified in "predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS"
+     * Returns an ArrayList of RatingContainer instances from a file.
+     * The file is specified in predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS
      * @param context context of the application
-     * @return ArrayList of CallRating instances saved in a file.
+     * @return ArrayList of RatingContainer instances saved in a file.
      */
-    public static ArrayList<CallRating> getRatingsFromAFile(AppCompatActivity context) {
+    public static ArrayList<RatingContainer> getRatingsFromAFile(AppCompatActivity context) {
         String storageFilePath = context.getFilesDir() + "/" + NAME_OF_A_FILE_WITH_CALL_RATINGS;
 
         File storageFile = new File(storageFilePath);
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream = null;
 
-        ArrayList<CallRating> ratings = null;
+        ArrayList<RatingContainer> ratings = null;
 
         try {
             if(storageFile.createNewFile())
@@ -209,7 +209,7 @@ public class CallRating implements java.io.Serializable {
         try {
             fileInputStream = context.openFileInput(NAME_OF_A_FILE_WITH_CALL_RATINGS);
             objectInputStream = new ObjectInputStream(fileInputStream);
-            ratings = (ArrayList<CallRating>) objectInputStream.readObject();
+            ratings = (ArrayList<RatingContainer>) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -232,21 +232,21 @@ public class CallRating implements java.io.Serializable {
     }
 
     /**
-     * Returns a single CallRating instance from a file.
-     * The file is specified in "predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS"
+     * Returns a single RatingContainer instance from a file.
+     * The file is specified in predefined.Strings.NAME_OF_A_FILE_WITH_CALL_RATINGS
      * @param context context of the application
-     * @param primaryKey key of the retrieved CallRating instance
-     * @return CallRating instance with given "primaryKey", or null on failure.
+     * @param primaryKey key of the retrieved RatingContainer instance
+     * @return RatingContainer instance with given primaryKey, or null on failure.
      */
-    public static CallRating getASingleRatingFromAFile(AppCompatActivity context, String primaryKey) {
+    public static RatingContainer getASingleRatingFromAFile(AppCompatActivity context, String primaryKey) {
         String storageFilePath = context.getFilesDir() + "/" + NAME_OF_A_FILE_WITH_CALL_RATINGS;
-        CallRating outputRating = null;
+        RatingContainer outputRating = null;
 
         File storageFile = new File(storageFilePath);
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream = null;
 
-        ArrayList<CallRating> ratings = null;
+        ArrayList<RatingContainer> ratings = null;
 
         try {
             if(storageFile.createNewFile())
@@ -258,7 +258,7 @@ public class CallRating implements java.io.Serializable {
         try {
             fileInputStream = context.openFileInput(NAME_OF_A_FILE_WITH_CALL_RATINGS);
             objectInputStream = new ObjectInputStream(fileInputStream);
-            ratings = (ArrayList<CallRating>) objectInputStream.readObject();
+            ratings = (ArrayList<RatingContainer>) objectInputStream.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -277,7 +277,7 @@ public class CallRating implements java.io.Serializable {
             }
         }
 
-        for(CallRating rating : ratings)
+        for(RatingContainer rating : ratings)
             if(rating.getPrimaryKey().equals(primaryKey))
                 outputRating = rating;
 
@@ -285,36 +285,36 @@ public class CallRating implements java.io.Serializable {
     }
 
     /**
-     * Adds a new rating to the "float[] callRatings" array.
+     * Adds a new rating to the ratings array.
      * Once the array is full and a new value is added the oldest value is overwritten.
      * The newest value has the highest index among all added values.
      * If array isn't full then:
-     * 1: element is added at the first place where the value doesn't equal "predefined.Values.VALUE_FOR_EMPTY_RATING". (so the place is "empty")
+     * 1: element is added at the first place where the value doesn't equal predefined.Values.VALUE_FOR_EMPTY_RATING. (so the place is "empty")
      * Once the array is full and new value is added:
      * 1: all elements except the first one (index 0) have their index decremented.
-     * 2: new element is added at the end. (index callRating.size() - 1)
+     * 2: new element is added at the end. (index ratings.size() - 1)
      * @param rating the added new rating value
      */
     public void addRating(float rating) {
         int l = 0;
 
-        while (l < callRatings.length && callRatings[l] != -1 * Float.MAX_VALUE)
+        while (l < ratings.length && ratings[l] != -1 * Float.MAX_VALUE)
             l++;
 
-        if (l < callRatings.length) {
-            this.callRatings[l] = rating;
+        if (l < ratings.length) {
+            this.ratings[l] = rating;
         }
 
-        if (l == callRatings.length) {
-            System.arraycopy(callRatings, 1, callRatings, 0, callRatings.length - 1);
+        if (l == ratings.length) {
+            System.arraycopy(ratings, 1, ratings, 0, ratings.length - 1);
 
-            this.callRatings[callRatings.length - 1] = rating;
+            this.ratings[ratings.length - 1] = rating;
         }
     }
 
     // getters/setters
-    public float[] getCallRatings() {
-        return callRatings;
+    public float[] getRatings() {
+        return ratings;
     }
 
     public String getPrimaryKey() {
@@ -325,8 +325,8 @@ public class CallRating implements java.io.Serializable {
         this.primaryKey = primaryKey;
     }
 
-    public void setCallRatings(float[] callRatings) {
-        this.callRatings = callRatings;
+    public void setRatings(float[] ratings) {
+        this.ratings = ratings;
     }
 
     // overrides
@@ -335,8 +335,8 @@ public class CallRating implements java.io.Serializable {
     public String toString() {
         String output = primaryKey + ": {";
 
-        for (float callRating : callRatings)
-            output += callRating + ", ";
+        for (float rating : ratings)
+            output += rating + ", ";
 
         // deleting last ", " part
         output = output.substring(0, output.length() - 2);
