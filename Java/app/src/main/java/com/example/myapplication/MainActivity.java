@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerItem clickedItem = (SpinnerItem)parent.getItemAtPosition(position);
                 int clickedImg = clickedItem.getSpinnerImg();
-                Toast.makeText(MainActivity.this, clickedImg + ": selected img", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                recyclerList.get(position).clicked("Zaznaczone");
                 mRecyclerAdapter.notifyItemChanged(position);
             }
 

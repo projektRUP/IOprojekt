@@ -61,7 +61,9 @@ public class WhatsappContact {
     }
 
     /**
-     * Looks for a RatingContainer instance from an ArrayList and assigns it to ratings
+     * Looks for a RatingContainer instance from an ArrayList and assigns it to userRatings
+     * The method looks for RatingContainer instance with primaryKey matching the WhatsappContact's primaryKey.
+     * If such RatingContainer instance is not found, then userRatings isn't overwritten.
      * @param ratings ArrayList of ratings from which the method will try to find and assign RatingContainer instances.
      * @throws PassedArgumentIsNullException if passed argument ratings is null an exception will be thrown.
      */
@@ -80,7 +82,7 @@ public class WhatsappContact {
 
     /**
      * Returns number of stars depending on:
-     * 1. average ratings
+     * 1. average of userRatings
      * 2. Predefined.MAX_NUMBER_OF_STARS (maximal value returned)
      * 3. Predefined.VALUE_FOR_NEXT_STAR
      * Returns -1 if average value is out of range.

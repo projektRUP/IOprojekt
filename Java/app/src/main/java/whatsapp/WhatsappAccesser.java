@@ -122,13 +122,13 @@ public class WhatsappAccesser {
      */
     public static boolean isWhatsappInstalled(AppCompatActivity context) {
         PackageManager packageManager = context.getPackageManager();
-        boolean app_installed;
+        boolean isWhatsappInstalled;
         try {
             packageManager.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
-            app_installed = true;
+            isWhatsappInstalled = true;
         } catch (PackageManager.NameNotFoundException e) {
-            app_installed = false;
+            isWhatsappInstalled = false;
         }
-        return app_installed;
+        return isWhatsappInstalled;
     }
 }
