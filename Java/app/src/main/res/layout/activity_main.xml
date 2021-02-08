@@ -39,12 +39,20 @@
                 android:background="@drawable/linearlayout_bg"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/ic_baseline_search_24" />
+
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/search_bar"
-                    android:hint="Search"
-                    android:padding="12dp"/>
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:hint="Szukaj"
+                    android:background="@null"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
             <Spinner
