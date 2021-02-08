@@ -39,6 +39,12 @@
                 android:background="@drawable/linearlayout_bg"
                 android:orientation="horizontal">
 
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/search_bar"
+                    android:hint="Search"
+                    android:padding="12dp"/>
             </LinearLayout>
 
             <Spinner

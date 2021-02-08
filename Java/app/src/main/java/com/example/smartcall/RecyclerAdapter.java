@@ -3,15 +3,18 @@ package com.example.smartcall;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
     private ArrayList<RecyclerItem> mRecyclerList;
     private OnItemClickListener mListener;
 
@@ -76,7 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         }
     }
 
-    public RecyclerAdapter(ArrayList<RecyclerItem> recyclerList){
+    public RecyclerAdapter(ArrayList<RecyclerItem> recyclerList) {
         mRecyclerList = recyclerList;
     }
     @NonNull
@@ -99,5 +102,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public int getItemCount() {
         return mRecyclerList.size();
+    }
+
+    public void filterList(ArrayList<RecyclerItem> filteredList){
+        mRecyclerList = filteredList;
+        notifyDataSetChanged();
     }
 }
