@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,6 +28,7 @@ import whatsapp.WhatsappContact;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<SpinnerItem> spinnerList;
     private ArrayList<RecyclerItem> recyclerList;
+    private ArrayList<RecyclerItem> searchRecyclerList;
     private ArrayList<WhatsappContact> contactList;
 
     private SpinnerAdapter sAdapter;
@@ -98,7 +103,37 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        EditText searchText = findViewById(R.id.search_bar);
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
     }
+
+    private void filter(String text){
+        ArrayList<RecyclerItem> filteredList = new ArrayList<>();
+
+        for (RecyclerItem item : recyclerList) {
+            if (item.getNameSurname().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        mRecyclerAdapter.filterList(filteredList);
+    }
+
     private void initList(){
         spinnerList = new ArrayList<SpinnerItem>();
         spinnerList.add(new SpinnerItem(R.drawable.ic_baseline_star_rate_24));
