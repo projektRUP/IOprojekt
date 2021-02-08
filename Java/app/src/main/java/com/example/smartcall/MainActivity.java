@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.smartcall;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,14 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import exceptions.AppDoesntHaveNecessaryPermissionsException;
 import exceptions.NoWhatsappInstalledException;
-import phone.ImageRetriever;
 import phone.Permissions;
 import whatsapp.WhatsappAccesser;
 import whatsapp.WhatsappContact;
