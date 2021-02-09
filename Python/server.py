@@ -37,9 +37,11 @@ while True:
     print('Connected with ' + addr[0] + ':' + str(addr[1]))
 
     # reading file size to download and confirming that file was received
-    file_size = conn.recv(32)
+    data = conn.recv(32)
+    file_size = data.decode('utf-8')
     reply = "File size send"
-    conn.sendall(reply)
+    b_reply = reply.encode('utf-8')
+    conn.sendall(b_reply)
     print("File size: " + file_size)
 
     # clearing work file
@@ -61,10 +63,12 @@ while True:
 
     # reply (audio analysis output)
     reply = str(audio_analysis())
-    conn.sendall(reply)
+    b_reply = reply.encode('utf-8')
+    conn.sendall(b_reply)
 
     # closing connection and work file
     conn.close()
     outfile.close()
 # closing socket
 s.close()
+
