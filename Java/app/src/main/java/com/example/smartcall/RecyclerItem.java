@@ -1,13 +1,14 @@
 package com.example.smartcall;
 
 public class RecyclerItem {
-    private int profileImg, ratingImg;
+    private int profileImg, ratingImg, whatsappContactIndex;
     private String name_surname;
 
-    public RecyclerItem(int profImgRes, int ratingImgRes, String text){
+    public RecyclerItem(int profImgRes, int ratingImgRes, String text, int index){
         profileImg = profImgRes;
         ratingImg = ratingImgRes;
         name_surname = text;
+        whatsappContactIndex = index;
     }
 
     public int getProfImg(){
@@ -18,6 +19,9 @@ public class RecyclerItem {
     }
     public String getNameSurname(){
         return name_surname;
+    }
+    public int getWhatsappContactIndex() {
+        return whatsappContactIndex;
     }
 
     public void clicked(String text){

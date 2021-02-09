@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<RecyclerItem> recyclerList;
     private ArrayList<RecyclerItem> searchRecyclerList;
     private ArrayList<WhatsappContact> contactList;
+    private ArrayList<WhatsappContact> currentlyDisplayedContactList;
 
     private SpinnerAdapter sAdapter;
     private RecyclerView mRecyclerView;
@@ -79,10 +80,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCallClick(int posititon) {
-                //Toast.makeText(MainActivity.this, posititon + ": selected call", Toast.LENGTH_SHORT).show();
+            public void onCallClick(int position) {
                 try {
-                    WhatsappAccesser.makeACall(MainActivity.this, contactList.get(posititon).getVoipCallId());
+                    WhatsappAccesser.makeACall(MainActivity.this, currentlyDisplayedContactList.get(position).getVoipCallId());
                 } catch (NoWhatsappInstalledException | AppDoesntHaveNecessaryPermissionsException e) {
                     e.printStackTrace();
                     // TODO notify user about why the function might not work
@@ -91,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onVideoCallClick(int position) {
-                //Toast.makeText(MainActivity.this, position + ": selected videocall", Toast.LENGTH_SHORT).show();
                 try {
-                    WhatsappAccesser.makeACall(MainActivity.this, contactList.get(position).getVideoCallId());
+                    WhatsappAccesser.makeACall(MainActivity.this, currentlyDisplayedContactList.get(position).getVideoCallId());
                 } catch (NoWhatsappInstalledException | AppDoesntHaveNecessaryPermissionsException e) {
                     e.printStackTrace();
                     // TODO notify user about why the function might not work
@@ -122,10 +121,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void filter(String text){
         ArrayList<RecyclerItem> filteredList = new ArrayList<>();
+        currentlyDisplayedContactList = new ArrayList<>();
 
         for (RecyclerItem item : recyclerList) {
             if (item.getNameSurname().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
+                currentlyDisplayedContactList.add(contactList.get(item.getWhatsappContactIndex()));
             }
         }
         mRecyclerAdapter.filterList(filteredList);
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             contactList = WhatsappAccesser.getWhatsappContacts(this);
+            currentlyDisplayedContactList = contactList;
         } catch (NoWhatsappInstalledException e) {
             e.printStackTrace();
             // TODO notify user that whatsapp might not be installed
@@ -150,21 +152,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(contactList != null) {
+            int index = 0;
+
             for(WhatsappContact contact : contactList) {
                 switch(contact.getStars()) {
-                    case 1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_1, contact.getDisplayName()));
+                    case 1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_1, contact.getDisplayName(), index ++));
                         break;
-                    case 2: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_2, contact.getDisplayName()));
+                    case 2: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_2, contact.getDisplayName(), index ++));
                         break;
-                    case 3: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_3, contact.getDisplayName()));
+                    case 3: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_3, contact.getDisplayName(), index ++));
                         break;
-                    case 4: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_4, contact.getDisplayName()));
+                    case 4: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_4, contact.getDisplayName(), index ++));
                         break;
-                    case 5: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName()));
+                    case 5: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName(), index ++));
                         break;
-                    case -1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_none, contact.getDisplayName()));
+                    case -1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_none, contact.getDisplayName(), index ++));
                         break;
                 }
+                System.out.println(contact);
             }
         }
     }
