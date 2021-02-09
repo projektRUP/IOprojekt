@@ -7,12 +7,13 @@ from array import array
 from os import stat
 
 # converting audio file to binary array
-file_name = "harvard.wav"
+file_name = "example.wav"
 arr = array('B')  # create binary array to hold the wave file
 result = stat(file_name)  # sample file is in the same folder
 f = open(file_name, 'rb')
 arr.fromfile(f, result.st_size)  # using file size as the array length
-print("Length of data: " + str(len(arr)))
+file_size = str(len(arr))
+print("Length of data: " + file_size)
 f.close()
 
 # TCP settings
@@ -26,7 +27,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 
 # sending file length and waiting for response
-s.send(str(len(arr)))
+b_file_size = file_size.encode('utf-8')
+s.send(b_file_size)
 data = s.recv(BUFFER_SIZE)
 
 # sending file
@@ -35,6 +37,8 @@ s.send(arr)
 
 # receiving answer
 data = s.recv(BUFFER_SIZE)
+an_output = data.decode('utf-8')
 s.close()
 
-print("Received data:", data)
+print("Received data:", an_output)
+
