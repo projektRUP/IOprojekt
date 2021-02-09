@@ -9,7 +9,7 @@ import android.provider.MediaStore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
+import com.example.smartcall.R;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

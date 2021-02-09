@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.smartcall;
 
 public class SpinnerItem {
     private int mImg;
