@@ -60,15 +60,17 @@ while True:
             break
         outfile.write(data)
         counter = counter + 1
+        print("Received packet number: "+str(counter))
 
+    print("All packets received")
     # reply (audio analysis output)
     reply = str(audio_analysis())
     b_reply = reply.encode('utf-8')
     conn.sendall(b_reply)
+    print("Response '"+reply+"' send")
 
     # closing connection and work file
     conn.close()
     outfile.close()
 # closing socket
 s.close()
-
