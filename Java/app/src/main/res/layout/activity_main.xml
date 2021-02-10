@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/container1"
         android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +50,9 @@
                     android:id="@+id/search_bar"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:hint="Szukaj"
                     android:background="@null"
-                    android:textSize="20sp"/>
+                    android:hint="Szukaj"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <Spinner
@@ -66,58 +66,17 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImg"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:src="@drawable/ic_baseline_person_24"
-                app:civ_border_color="#FFFFFF"
-                app:civ_border_width="2dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="Jan Kowalski"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Użytkownik telefonu" />
-            </LinearLayout>
-        </LinearLayout>
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="350dp"
-        android:layout_height="490dp"
+        android:layout_height="520dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container1"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

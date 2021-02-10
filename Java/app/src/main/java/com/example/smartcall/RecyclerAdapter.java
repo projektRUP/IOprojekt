@@ -94,7 +94,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         RecyclerItem currentItem = mRecyclerList.get(position);
 
-        holder.mImageView.setImageResource(currentItem.getProfImg());
+        holder.mImageView.setImageBitmap(currentItem.getProfImg());
         holder.mImageView2.setImageResource(currentItem.getRatingImg());
         holder.mText.setText(currentItem.getNameSurname());
     }
