@@ -15,26 +15,26 @@ PORT = 5000  # arbitrary non-privileged port
 
 # creating socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print('Socket created')
+print("Socket created")
 
 # binding socket
 try:
     s.bind((HOST, PORT))
-except (socket.error, msg):
-    print('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+except socket.error as msg:
+    print("Bind failed. Error Code : " + str(msg[0]) + " Message " + msg[1])
     sys.exit()
-print('Socket bind complete')
+print("Socket bind complete")
 
 # listening
 s.listen(10)
 
 # serial multiple connections service
 while True:
-    print('Socket now listening')
+    print("Socket now listening")
 
     # accepting connection
     conn, addr = s.accept()
-    print('Connected with ' + addr[0] + ':' + str(addr[1]))
+    print("Connected with " + addr[0] + ":" + str(addr[1]))
 
     # reading file size to download and confirming that file was received
     data = conn.recv(32)
@@ -60,7 +60,7 @@ while True:
             break
         outfile.write(data)
         bytes_received = bytes_received + len(data)
-        print("Received packet size: "+str(len(data)))
+        # print("Received packet size: "+str(len(data)))
 
     print("All packets received")
     # reply (audio analysis output)
