@@ -1,11 +1,34 @@
+from __future__ import unicode_literals
+
 import socket
 import sys
-import random
+
+import speech_recognition as sr
+from googletrans import Translator
+from textblob import TextBlob
 
 
 # simulating output from audio analysis
 def audio_analysis():
-    output_data = random.randrange(0, 2)
+    r = sr.Recognizer()
+
+    with sr.AudioFile('new_file.wav') as source:
+        audio = r.record(source)
+        try:
+            print("Entered 'try', proceeding to transcribe")
+            transcript = r.recognize_google(audio)
+            print("Transcription finished")
+        except:
+            print("Transcription went wrong!")
+
+    translator = Translator()
+    translation = translator.translate(transcript, src='en', dest='en')  # TODO: change language to Polish if connected
+    translated_text = translation.text
+
+    blob = TextBlob(translated_text)
+
+    output_data = 0.5 * (blob.sentiment.polarity + 1)
+
     return output_data
 
 
@@ -60,17 +83,16 @@ while True:
             break
         outfile.write(data)
         bytes_received = bytes_received + len(data)
-        # print("Received packet size: "+str(len(data)))
 
+    outfile.close()  # closing work file
     print("All packets received")
-    # reply (audio analysis output)
+
     reply = str(audio_analysis())
     b_reply = reply.encode('utf-8')
     conn.sendall(b_reply)
-    print("Response '"+reply+"' send")
+    print("Response send " + reply)
 
-    # closing connection and work file
-    conn.close()
-    outfile.close()
+    conn.close()  # closing connection
+
 # closing socket
 s.close()
