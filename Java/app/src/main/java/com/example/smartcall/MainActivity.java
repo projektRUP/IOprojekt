@@ -156,20 +156,19 @@ public class MainActivity extends AppCompatActivity {
 
             for(WhatsappContact contact : contactList) {
                 switch(contact.getStars()) {
-                    case 1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_1, contact.getDisplayName(), index ++));
+                    case 1: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_1, contact.getDisplayName(), index ++));
                         break;
-                    case 2: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_2, contact.getDisplayName(), index ++));
+                    case 2: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_2, contact.getDisplayName(), index ++));
                         break;
-                    case 3: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_3, contact.getDisplayName(), index ++));
+                    case 3: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_3, contact.getDisplayName(), index ++));
                         break;
-                    case 4: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_4, contact.getDisplayName(), index ++));
+                    case 4: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_4, contact.getDisplayName(), index ++));
                         break;
-                    case 5: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_5, contact.getDisplayName(), index ++));
+                    case 5: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_5, contact.getDisplayName(), index ++));
                         break;
-                    case -1: recyclerList.add(new RecyclerItem(R.drawable.ic_baseline_person_24, R.drawable.rating_none, contact.getDisplayName(), index ++));
+                    case -1: recyclerList.add(new RecyclerItem(contact.getContactPhoto(), R.drawable.rating_none, contact.getDisplayName(), index ++));
                         break;
                 }
-                System.out.println(contact);
             }
         }
     }
