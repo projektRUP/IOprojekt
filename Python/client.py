@@ -18,10 +18,10 @@ f.close()
 
 # TCP settings
 TCP_IP = '10.71.8.73'  # TODO: set server's IP address
-#TCP_IP = '150.254.79.172'
 TCP_PORT = 5000
 BUFFER_SIZE = 1024
-MESSAGE = "Sending audio file "+file_name
+MESSAGE = "Sending audio file " + file_name
+print(MESSAGE)
 
 # creating socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,14 +33,11 @@ s.send(b_file_size)
 data = s.recv(BUFFER_SIZE)
 
 # sending file
-print(MESSAGE)
-#s.sendall(arr)
 counter = 0
 with open('harvard.wav', 'rb') as f:  
-    for l in f: 
+    for l in f:
         counter = counter + 1
         s.sendall(l)
-        print("Send packet number: "+str(counter))
 
 print("All packets send")
 
@@ -49,4 +46,4 @@ data = s.recv(BUFFER_SIZE)
 an_output = data.decode('utf-8')
 s.close()
 
-print("Received data:", an_output)
+print("Received data: ", an_output)
