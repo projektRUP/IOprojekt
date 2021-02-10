@@ -54,7 +54,7 @@ while True:
     counter = 0
 
     # loading data into file
-    while counter < (int(file_size)/512):
+    while counter < (float(file_size)/1024):
         data = conn.recv(1024)
         if not data:
             break
