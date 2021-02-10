@@ -34,7 +34,7 @@ public class ImageRetriever {
         if(!Permissions.doesApplicationHaveReadContactsPermission(context))
             throw new AppDoesntHaveNecessaryPermissionsException();
 
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_baseline_person_24);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.default_contact_photo);
 
         Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
         
