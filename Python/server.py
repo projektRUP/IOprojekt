@@ -51,16 +51,16 @@ while True:
 
     # work file opening
     outfile = open("new_file.wav", 'ab')
-    counter = 0
+    bytes_received = 0
 
     # loading data into file
-    while counter < (float(file_size)/1024):
+    while bytes_received < int(file_size):
         data = conn.recv(1024)
         if not data:
             break
         outfile.write(data)
-        counter = counter + 1
-        print("Received packet number: "+str(counter))
+        bytes_received = bytes_received + len(data)
+        print("Received packet size: "+str(len(data)))
 
     print("All packets received")
     # reply (audio analysis output)
